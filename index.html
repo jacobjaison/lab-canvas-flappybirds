@@ -8,13 +8,22 @@
     <title>LAB | Flappy Birds</title>
   </head>
   <body>
-    <img src="./images/logo.png" alt="" style="width:50%;" />
-    <br />
-    <button id="start-button">StartGame</button>
-    <div id="game-board">
-      <canvas id="my-canvas"></canvas>
+    <div class="game-intro">
+      <img src="./images/logo.png" alt="" style="width:50%;" />
+      <br />
+      <button id="start-button">StartGame</button>
     </div>
-
+    <div class="game-over hidden">
+      <h1> You Loose!!!</h1>
+      <button>Restart</button>
+    </div>
+   
+    <div id="game-board">
+      <canvas id="my-canvas" width="950" height="700"></canvas>
+    </div>
+    <script src="js/obstacle.js"></script>
+    <script src="js/flappybird.js"></script>
+    <script src="js/background.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>
