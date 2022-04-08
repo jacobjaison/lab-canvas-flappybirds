@@ -38,14 +38,19 @@ let background,
       score++;
     }
 
-    if (frameCounter < 30) {
-      flappy.draw1();
-    }
-    else {
+    if (frameCounter < 5) {
       flappy.draw2();
     }
+    else if (frameCounter < 20) {
+      flappy.draw1();
+    }
+    else if (frameCounter < 40) {
+      flappy.draw2();
+    }
+    else {
+      flappy.draw1();
+    }
       
-    
     if (frameCounter === 60){
       obstacles.push(new Obstacle(canvas,ctx,moveSpeed));
       frameCounter = 0;
@@ -94,6 +99,8 @@ let background,
           break;
       }      
     });
+    
+
     document.addEventListener("keyup", (e) => {
       console.log ('Key up event', e.key);
       switch(e.key) {
@@ -106,7 +113,42 @@ let background,
       }      
     });
   }
+  function removeEventListeners() {
+    console.log("inside remove event");
+    document.removeEventListener("keydown", (e) => {
+      console.log('keydown remove event');
+      switch(e.key) {
+        case " ":
+          console.log('inside keydown');
+          flappy.gravity = -35;
+          flappy.move();     
+          break;
+        case "ArrowDown":
+          flappy.gravity = 5;
+          flappy.move();
+          break;
+        case "ArrowUp":
+          console.log('inside Arrow up')
+          flappy.gravity = -25;
+          flappy.move();
+          break;
+        default:
+          break;
+      }      
+    },{passive:false});
 
+    document.removeEventListener("keyup", (e) => {
+      console.log ('Key up remove event', e.key);
+      switch(e.key) {
+        case " ":
+          flappy.gravity = 1;
+          flappy.move()
+          break;
+        default:
+          break;
+      }      
+    },{passive:false});
+  }
   function collisionBetweenFlappyAndObstacle() {
     let hasCollidedBottom = false,
         hasCollidedTop = false;
@@ -126,13 +168,16 @@ let background,
   }
 
   function reset() {
+    removeEventListeners();
+    clearInterval(intervalId);
     background = null;
     flappy = null;
     obstacles = [];
     moveSpeed = 5,
     frameCounter = 0;
     score = 0;    
-    clearInterval(intervalId);
+    
+    
   }
 
   function drawScore() {
