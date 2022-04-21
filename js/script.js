@@ -18,7 +18,7 @@ let background,
     gameOverElement.classList.add("hidden");
     background = new Background(canvas,ctx,moveSpeed);
     flappy = new Flappybird(canvas,ctx);
-
+    
     createEventListeners();
     update();
   }
@@ -67,7 +67,6 @@ let background,
    
     if (collisionBetweenFlappyAndObstacle())
     {
-      console.log("Collided");
       reset();
       gameOverElement.classList.remove("hidden");
       gameIntroElement.classList.add("hidden");
@@ -79,10 +78,8 @@ let background,
 
   function createEventListeners() {
     document.addEventListener("keydown", (e) => {
-      console.log('keydown event');
       switch(e.key) {
         case " ":
-          console.log('inside keydown');
           flappy.gravity = -35;
           flappy.move();     
           break;
@@ -91,7 +88,6 @@ let background,
           flappy.move();
           break;
         case "ArrowUp":
-          console.log('inside Arrow up')
           flappy.gravity = -25;
           flappy.move();
           break;
@@ -102,7 +98,6 @@ let background,
     
 
     document.addEventListener("keyup", (e) => {
-      console.log ('Key up event', e.key);
       switch(e.key) {
         case " ":
           flappy.gravity = 1;
@@ -114,7 +109,6 @@ let background,
     });
   }
   function removeEventListeners() {
-    console.log("inside remove event");
     document.removeEventListener("keydown", (e) => {
       console.log('keydown remove event');
       switch(e.key) {
@@ -138,7 +132,6 @@ let background,
     },{passive:false});
 
     document.removeEventListener("keyup", (e) => {
-      console.log ('Key up remove event', e.key);
       switch(e.key) {
         case " ":
           flappy.gravity = 1;
@@ -186,3 +179,5 @@ let background,
     ctx.fillText(`Score: ${score}`, 20, 50);
     ctx.fillText(`Player: Jaison J`, 20, 90)
   }
+
+  

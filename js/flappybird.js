@@ -62,8 +62,6 @@ class Flappybird {
 
     move() {
         if (this.y >= 0) {
-            console.log ('gravity',this.gravity);
-            console.log('gravityspeed',this.gravitySpeed);
             this.y += (this.speedY/this.gravitySpeed) * this.gravity;
         }
         else {
